@@ -171,6 +171,7 @@ submitBtn.addEventListener('click', () => {
 
     // Get guessed numbers
     const guessedNumbers = [];
+    let guessedNumbersString = '';
 
     for (let i = 0; i < numbersToGuess; i++) {
 
@@ -183,10 +184,18 @@ submitBtn.addEventListener('click', () => {
         // Check number guess
         if(!guessedNumbers.includes(userNumber) && simonNumbers.includes(userNumber)) {
             guessedNumbers.push(userNumber);
+            guessedNumbersString += userNumber + ', ';
         }
     }
 
-    
+    // Hide submit button
+    submitBtn.classList.add('d-none');
+
+    // Hide Panel
+    gamePanelElem.classList.add('d-none');
+
+    // Update message
+    guessedNumbers.length ? messageElem.innerText = `Hai indovinato i numeri: ${guessedNumbersString} per un totale di ${guessedNumbers.length} numeri.`: messageElem.innerText = 'Non hai individuato alcun numero.';
 
 
 });
