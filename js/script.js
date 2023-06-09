@@ -1,12 +1,24 @@
-/*
-    - Visualizzare in pagina 5 numeri casuali diversi. Da lì parte un timer di 30 secondi.
-    - Dopo 30 secondi i numeri scompaiono e l'utente deve inserire, uno alla volta, i numeri che ha visto precedentemente, tramite il prompt().
-    - Dopo che sono stati inseriti i 5 numeri, il software dice quanti e quali dei numeri da indovinare sono stati individuati.
+/* -----------------------------------------
+* FUNCTIONS
+-------------------------------------------*/
 
-Bonus:
-    - Mostriamo il countdown dei 30 secondi in pagina
-    - Facciamo inserire i numeri all'utente tramite 5 campi di input invece che via prompt
-*/
+//*** RESET GAME ***//
+const resetGame = () => {
+
+    // Set start message
+    messageElem.innerText = 'Premi il tasto "Gioca" per iniziare.';
+
+    // Reset elements visibility
+    countdownElem.classList.add('d-none');
+    gamePanelElem.classList.add('d-none');
+    playBtn.classList.remove('d-none');
+    submitBtn.classList.add('d-none');
+
+    // Reset Previous numbers
+    simonNumbers.splice(0, numbersToGuess);
+
+}
+
 
 /* -----------------------------------------
 * INIT
@@ -64,9 +76,6 @@ playBtn.addEventListener('click', () => {
     //*** CREATE NUMBERS ***//
     let numbersElemList = '';
 
-    // Reset Previous numbers
-    simonNumbers.splice(0, numbersToGuess);
-
     // Populate list with unique numbers from 1 to 20
     while (simonNumbers.length < numbersToGuess) {
 
@@ -120,7 +129,7 @@ playBtn.addEventListener('click', () => {
             // Hide countdown element
             countdownElem.classList.add('d-none');
 
-            // Get dinamic numbers
+            // Get dynamic elements
             const numbersElem = gamePanelElem.querySelectorAll('.game-number div');
             const numbersInput = gamePanelElem.querySelectorAll('.game-number input');
 
@@ -195,7 +204,10 @@ submitBtn.addEventListener('click', () => {
     gamePanelElem.classList.add('d-none');
 
     // Update message
-    guessedNumbers.length ? messageElem.innerText = `Hai indovinato i numeri: ${guessedNumbersString} per un totale di ${guessedNumbers.length} numeri.`: messageElem.innerText = 'Non hai individuato alcun numero.';
+    messageElem.innerText = 'Non hai individuato alcun numero.'
+    if(guessedNumbers.length) messageElem.innerText = `Hai indovinato i numeri: ${guessedNumbersString} per un totale di ${guessedNumbers.length} numeri.`;
 
+    // Start reset counter
+    setTimeout(resetGame, 5000);
 
 });
