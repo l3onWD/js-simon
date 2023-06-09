@@ -18,8 +18,6 @@ const messageElem = document.getElementById('game-message');
 const gamePanelElem = document.getElementById('game-panel');
 const playBtn = document.getElementById('play-btn');
 const submitBtn = document.getElementById('submit-btn');
-const numbersElem = document.querySelectorAll('.game-number');
-
 
 
 // !Log Data
@@ -29,7 +27,6 @@ console.log('Messaggio: ' + messageElem);
 console.log('Pannello: ' + gamePanelElem);
 console.log('Bottone Play: ' + playBtn);
 console.log('Bottone Invia: ' + submitBtn);
-console.table('Numeri: ' + numbersElem);
 console.log('--- INIT DONE ---');
 
 /* -----------------------------------------
@@ -66,6 +63,14 @@ playBtn.addEventListener('click', () => {
         return numbers;
     }
 
+    /* --------
+    * INIT
+    ----------*/
+
+    //*** DATA ***//
+    const numbersToGuess = 5;
+    const userNumbers = [];
+
 
     /* --------
     * LOGIC
@@ -74,10 +79,30 @@ playBtn.addEventListener('click', () => {
     // Hide Button
     playBtn.classList.add('d-none');
 
+    // Generete unique numbers from 1 to 20
+    const numbers = generateUniqueNumbers(numbersToGuess, 1, 20);
 
-    // Generete 5 numbers from 1 to 20
-    const numbers = generateUniqueNumbers(5, 1, 20);
-    console.log(numbers);
+    // Create numbers elements
+    let numbersElem = '';
+    for (let i = 0; i < numbersToGuess; i++) {
+        
+        numbersElem += `
+        <div class="col">
+
+            <div class="border rounded p-4 game-number">
+                
+                <div class="fs-3">${numbers[i]}</div>
+                <input type="number" class="d-none">
+
+            </div>
+
+        </div>
+        `;
+        
+    }
+
+    // Insert numbers elements
+    gamePanelElem.innerHTML = numbersElem;
 
     // Show Panel
     gamePanelElem.classList.remove('d-none');
