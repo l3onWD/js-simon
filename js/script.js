@@ -15,15 +15,21 @@ Bonus:
 
 //*** DOM ELEMENTS ***//
 const messageElem = document.getElementById('game-message');
+const countdownElem = document.getElementById('game-countdown');
 const gamePanelElem = document.getElementById('game-panel');
 const playBtn = document.getElementById('play-btn');
 const submitBtn = document.getElementById('submit-btn');
+
+
+//*** DATA ***//
+let countdown;
 
 
 // !Log Data
 console.log('--- INIT ---');
 console.log('### Eleemnti DOM:');
 console.log('Messaggio: ' + messageElem);
+console.log('Countdown: ' + countdownElem);
 console.log('Pannello: ' + gamePanelElem);
 console.log('Bottone Play: ' + playBtn);
 console.log('Bottone Invia: ' + submitBtn);
@@ -70,15 +76,14 @@ playBtn.addEventListener('click', () => {
     //*** DATA ***//
     const numbersToGuess = 5;
     const userNumbers = [];
+    let count = 30;
 
 
     /* --------
     * LOGIC
     ----------*/
 
-    // Hide Button
-    playBtn.classList.add('d-none');
-
+    //*** CREATE NUMBERS ***//
     // Generete unique numbers from 1 to 20
     const numbers = generateUniqueNumbers(numbersToGuess, 1, 20);
 
@@ -103,6 +108,21 @@ playBtn.addEventListener('click', () => {
 
     // Insert numbers elements
     gamePanelElem.innerHTML = numbersElem;
+
+
+    //*** SET COUNTDOWN ***//
+    countdownElem.innerText = count;
+
+    countdown = setInterval(() => {
+
+        countdownElem.innerText = --count;
+
+    }, 1000);
+
+
+    //*** SHOW PANEL ***//
+    // Hide Button
+    playBtn.classList.add('d-none');
 
     // Show Panel
     gamePanelElem.classList.remove('d-none');
