@@ -22,7 +22,7 @@ const submitBtn = document.getElementById('submit-btn');
 
 
 //*** DATA ***//
-let countdown;
+
 
 
 // !Log Data
@@ -69,14 +69,16 @@ playBtn.addEventListener('click', () => {
         return numbers;
     }
 
+
     /* --------
     * INIT
     ----------*/
 
     //*** DATA ***//
     const numbersToGuess = 5;
-    const userNumbers = [];
-    let count = 30;
+
+    let countdown;
+    let count = 3;
 
 
     /* --------
@@ -88,16 +90,16 @@ playBtn.addEventListener('click', () => {
     const numbers = generateUniqueNumbers(numbersToGuess, 1, 20);
 
     // Create numbers elements
-    let numbersElem = '';
+    let numbersElemList = '';
     for (let i = 0; i < numbersToGuess; i++) {
         
-        numbersElem += `
+        numbersElemList += `
         <div class="col">
 
             <div class="border rounded p-4 game-number">
                 
                 <div class="fs-3">${numbers[i]}</div>
-                <input type="number" class="d-none">
+                <input type="number" class="d-none" min="1" max="20" value="1">
 
             </div>
 
@@ -107,22 +109,64 @@ playBtn.addEventListener('click', () => {
     }
 
     // Insert numbers elements
-    gamePanelElem.innerHTML = numbersElem;
+    gamePanelElem.innerHTML = numbersElemList;
 
 
     //*** SET COUNTDOWN ***//
+
+    // Set countdown on page
     countdownElem.innerText = count;
 
+    // Start countdown
     countdown = setInterval(() => {
 
+        // Update countdown
         countdownElem.innerText = --count;
+
+        //*** COUNTDOWN OVER ***//
+        if (count === 0) {
+
+            // Stop timer
+            clearInterval(countdown);
+
+            // Hide countdown element
+            countdownElem.classList.add('d-none');
+
+            // Get dinamic numbers
+            const numbersElem = gamePanelElem.querySelectorAll('.game-number div');
+            const numbersInput = gamePanelElem.querySelectorAll('.game-number input');
+
+            // Hide numbers and show inputs 
+            for (let i = 0; i < numbersToGuess; i++) {
+
+                const numberElem = numbersElem[i];
+                const numberinput = numbersInput[i];
+
+                numberElem.classList.add('d-none');
+                numberinput.classList.remove('d-none');
+                
+            }
+
+            // Update message
+            messageElem.innerText = `Digita i numeri precedenti in qualsiasi ordine.`;
+
+            // Show submit button
+            submitBtn.classList.remove('d-none');
+
+        }
 
     }, 1000);
 
 
-    //*** SHOW PANEL ***//
+    //*** SHOW START GAME ***//
     // Hide Button
     playBtn.classList.add('d-none');
+
+    // Update message
+    messageElem.innerText = `Hai ${count} secondi per memorizzare i numeri!`;
+
+    // Show countdown
+    countdownElem.classList.remove('d-none');
 
     // Show Panel
     gamePanelElem.classList.remove('d-none');
