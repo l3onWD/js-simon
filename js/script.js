@@ -66,7 +66,7 @@ playBtn.addEventListener('click', () => {
 
     //*** DATA ***//
     let countdown;
-    let count = 3;
+    let count = 30;
 
 
     /* --------
@@ -120,6 +120,7 @@ playBtn.addEventListener('click', () => {
         // Update countdown
         countdownElem.innerText = --count;
 
+
         //*** COUNTDOWN OVER ***//
         if (count === 0) {
 
@@ -144,6 +145,7 @@ playBtn.addEventListener('click', () => {
                 
             }
 
+            //*** SHOW GUESS STATE ELEMENTS ***//
             // Update message
             messageElem.innerText = `Digita i numeri precedenti in qualsiasi ordine.`;
 
@@ -155,7 +157,7 @@ playBtn.addEventListener('click', () => {
     }, 1000);
 
 
-    //*** SHOW START GAME ***//
+    //*** SHOW START GAME ELEMENTS ***//
     // Hide Button
     playBtn.classList.add('d-none');
 
@@ -197,6 +199,7 @@ submitBtn.addEventListener('click', () => {
         }
     }
 
+    //*** SHOW END GAME ELEMENTS ***//
     // Hide submit button
     submitBtn.classList.add('d-none');
 
