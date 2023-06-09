@@ -34,80 +34,87 @@
 
             <!-- Message -->
             <div class="my-4 py-2">
-                <p class="mb-0">Hai 30 secondi per memorizzare i numeri!</p>
+                <p id="game-message" class="mb-0">Premi il tasto "Gioca" per iniziare.</p>
             </div>
 
-            <!-- Countdown -->
-            <h2 class="display-3 fw-bold m-4">0</h2>
 
-            <!-- Numbers -->
-            <div class="row">
+            <!-- Game Panel -->
+            <div id="game-panel" class="d-none">
 
-                <!-- Number -->
-                <div class="col">
+                <!-- Countdown -->
+                <h2 id="game-countdown" class="display-3 fw-bold m-4">0</h2>
 
-                    <div class="border rounded p-4">
-                        
-                        <div class="fs-3">10</div>
-                        <input type="number">
+                <!-- Numbers -->
+                <div class="row">
 
+                    <!-- Number -->
+                    <div class="col">
+
+                        <div class="border rounded p-4 game-number">
+                            
+                            <div class="fs-3">10</div>
+                            <input type="number" class="d-none">
+
+                        </div>
+            
                     </div>
-        
-                </div>
 
-                <!-- Number -->
-                <div class="col">
+                    <!-- Number -->
+                    <div class="col">
 
-                    <div class="border rounded p-4">
-                        
-                        <div class="fs-3">10</div>
-                        <input type="number">
-                        
+                        <div class="border rounded p-4 game-number">
+                            
+                            <div class="fs-3">10</div>
+                            <input type="number" class="d-none">
+                            
+                        </div>
+            
                     </div>
-        
-                </div>
 
-                <!-- Number -->
-                <div class="col">
+                    <!-- Number -->
+                    <div class="col">
 
-                    <div class="border rounded p-4">
-                        
-                        <div class="fs-3">10</div>
-                        <input type="number">
-                        
+                        <div class="border rounded p-4 game-number">
+                            
+                            <div class="fs-3">10</div>
+                            <input type="number" class="d-none">
+                            
+                        </div>
+            
                     </div>
-        
-                </div>
 
-                <!-- Number -->
-                <div class="col">
+                    <!-- Number -->
+                    <div class="col">
 
-                    <div class="border rounded p-4">
-                        
-                        <div class="fs-3">10</div>
-                        <input type="number">
-                        
+                        <div class="border rounded p-4 game-number">
+                            
+                            <div class="fs-3">10</div>
+                            <input type="number" class="d-none">
+                            
+                        </div>
+            
                     </div>
-        
-                </div>
 
-                <!-- Number -->
-                <div class="col">
+                    <!-- Number -->
+                    <div class="col">
 
-                    <div class="border rounded p-4">
-                        
-                        <div class="fs-3">10</div>
-                        <input type="number">
-                        
+                        <div class="border rounded p-4 game-number">
+                            
+                            <div class="fs-3">10</div>
+                            <input type="number" class="d-none">
+                            
+                        </div>
+            
                     </div>
-        
+
                 </div>
 
             </div>
+
 
             <!-- Button -->
             <div class="my-4">
-                <button class="btn btn-primary">Gioca</button>
+                <button id="play-btn" class="btn btn-primary">Gioca</button>
             </div>
 
        
