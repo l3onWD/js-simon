@@ -10,18 +10,31 @@ Bonus:
 /* -----------------------------------------
 * INIT
 -------------------------------------------*/
-console.log('----------- INIT -----------');
 
 
-//***  ***//
+//*** DOM ELEMENTS ***//
+const messageElem = document.getElementById('game-message');
+const gamePanelElem = document.getElementById('game-panel');
+const playBtn = document.getElementById('play-btn');
+const submitBtn = document.getElementById('submit-btn');
+const numbersElem = document.querySelectorAll('.game-number');
 
+
+
+// !Log Data
+console.log('--- INIT ---');
+console.log('### Eleemnti DOM:');
+console.log('Messaggio: ' + messageElem);
+console.log('Pannello: ' + gamePanelElem);
+console.log('Bottone Play: ' + playBtn);
+console.log('Bottone Invia: ' + submitBtn);
+console.table('Numeri: ' + numbersElem);
+console.log('--- INIT DONE ---');
 
 /* -----------------------------------------
 * LOGIC
 -------------------------------------------*/
-console.log('----------- LOGIC -----------');
 
 
 
 
-console.log('----------- DONE -----------');
