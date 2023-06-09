@@ -169,9 +169,24 @@ submitBtn.addEventListener('click', () => {
     // Get inputs Elem
     const numbersInput = gamePanelElem.querySelectorAll('.game-number input');
 
-    const userNumbers = [];
+    // Get guessed numbers
+    const guessedNumbers = [];
+
     for (let i = 0; i < numbersToGuess; i++) {
-        const element = numbersInput[i];
-        
+
+        // Get current input
+        const currentInput = numbersInput[i];
+
+        // Get user number
+        const userNumber = parseInt(currentInput.value);
+
+        // Check number guess
+        if(!guessedNumbers.includes(userNumber) && simonNumbers.includes(userNumber)) {
+            guessedNumbers.push(userNumber);
+        }
     }
+
+    
+
+
 });
