@@ -22,7 +22,8 @@ const submitBtn = document.getElementById('submit-btn');
 
 
 //*** DATA ***//
-
+const numbersToGuess = 5;
+const simonNumbers = [];
 
 
 // !Log Data
@@ -46,37 +47,12 @@ playBtn.addEventListener('click', () => {
     * FUNCTIONS
     ----------*/
 
-    //*** GENERATE UNIQUE NUMBERS ***//
-    const generateUniqueNumbers = (number, minValue, maxValue) => {
-
-        const numbers = [];
-
-        // Populate list
-        while (numbers.length < number) {
-
-            let randomNumber;
-
-            // Get a random number until is unique
-            do {
-                randomNumber = Math.floor(Math.random() * (maxValue + 1 - minValue)) + minValue;
-
-            } while (numbers.includes(randomNumber));
-
-            // Add unique number inside the list
-            numbers.push(randomNumber);
-        }
-
-        return numbers;
-    }
-
 
     /* --------
     * INIT
     ----------*/
 
     //*** DATA ***//
-    const numbersToGuess = 5;
-
     let countdown;
     let count = 3;
 
@@ -86,26 +62,38 @@ playBtn.addEventListener('click', () => {
     ----------*/
 
     //*** CREATE NUMBERS ***//
-    // Generete unique numbers from 1 to 20
-    const numbers = generateUniqueNumbers(numbersToGuess, 1, 20);
-
-    // Create numbers elements
     let numbersElemList = '';
-    for (let i = 0; i < numbersToGuess; i++) {
-        
+
+    // Reset Previous numbers
+    simonNumbers.splice(0, numbersToGuess);
+
+    // Populate list with unique numbers from 1 to 20
+    while (simonNumbers.length < numbersToGuess) {
+
+        let randomNumber;
+
+        // Get a random number until is unique
+        do {
+            randomNumber = Math.floor(Math.random() * 20) + 1;
+
+        } while (simonNumbers.includes(randomNumber));
+
+        // Add unique number inside the list
+        simonNumbers.push(randomNumber);
+
+        // Create numbers elements
         numbersElemList += `
         <div class="col">
 
             <div class="border rounded p-4 game-number">
                 
-                <div class="fs-3">${numbers[i]}</div>
+                <div class="fs-3">${randomNumber}</div>
                 <input type="number" class="d-none" min="1" max="20" value="1">
 
             </div>
 
         </div>
         `;
-        
     }
 
     // Insert numbers elements
@@ -174,3 +162,16 @@ playBtn.addEventListener('click', () => {
 });
 
 
+
+//*** CLICK SUBMIT BUTTON ***//
+submitBtn.addEventListener('click', () => {
+
+    // Get inputs Elem
+    const numbersInput = gamePanelElem.querySelectorAll('.game-number input');
+
+    const userNumbers = [];
+    for (let i = 0; i < numbersToGuess; i++) {
+        const element = numbersInput[i];
+        
+    }
+});
