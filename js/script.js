@@ -1,50 +1,3 @@
-/*
-1) Visualizzare in pagina 5 numeri casuali diversi. Da lì parte un timer di 30 secondi.
-2) Dopo 30 secondi i numeri scompaiono e l'utente deve inserire, uno alla volta, i numeri che ha visto precedentemente, tramite il prompt().
-3) Dopo che sono stati inseriti i 5 numeri, il software dice quanti e quali dei numeri da indovinare sono stati individuati.
-
-Bonus:
-- Mostriamo il countdown dei 30 secondi in pagina
-- Facciamo inserire i numeri all'utente tramite 5 campi di input invece che via prompt
-
-
-PROGETTAZIONE:
-Il programma è diviso in 4 schermate:
-1) Schermata iniziale: bottone per iniziare a giocare
-2) Memorizzazione: appare il timer e i numeri, non c'è interazione possibile in questa fase
-3) Guessing: scompaiono i numeri ed appaiono 5 inputs con un tasto per inviare il risultato
-4) Risultato: appare il messaggio con i numeri corretti con un bottone restart (magari che appare dopo tot secondi)
-
-
-ELEMENTI FISSI:
-    - Messaggio: guida il giocatore
-
-ELEMENTI TEMPORANEI:
-    - Bottone start/restart: sia fase 1 che 4 (manda a fase 2)
-    - Timer: Solo fase 2 (manda a fase 3)
-    - Bottone submit: fase 3 (manda a fase 4)
-
-ELEMENTI DINAMICI:
-    - Numeri di "Simon": solo fase 2 (creati in fase 2)
-    - Inputs: fase 3 (creati in fase 2)
-
-
-MILESTONES:
-[milestone 1]
-    - Creare tutti gli elementi del programma e impostare HTML e CSS
-    - Al click del bottone "Gioca" generare 5 numeri casuali unici e loggarli in console
-
-[milestone 2]
-    - Mostrare in pagina i 5 numeri
-    - Impostare un timer che allo scadere nasconda gli elementi e mostri gli inputs dell'utente
-
-[milestone 3]
-    - Aggiungere un bottone per l'invio del risultato
-    - Confrontare i numeri inseriti con quelli di Simon e salvare i numeri corretti
-    - Mostrare i numeri indovinati e verificare se l'utente ha vinto
-
-*/
-
 /* -----------------------------------------
 * FUNCTIONS
 -------------------------------------------*/
@@ -104,12 +57,12 @@ playBtn.addEventListener('click', () => {
     // Reset Previous numbers
     simonNumbers.splice(0, numbersToGuess);
 
-    // Populate list with unique numbers from 1 to 20
+    // Create Numbers
     while (simonNumbers.length < numbersToGuess) {
 
         let randomNumber;
 
-        // Get a random number until is unique
+        // Get a random number from 1 to 20 until is unique
         do {
             randomNumber = Math.floor(Math.random() * 20) + 1;
 
@@ -118,7 +71,7 @@ playBtn.addEventListener('click', () => {
         // Add unique number inside the list
         simonNumbers.push(randomNumber);
 
-        // Create numbers elements
+        // Create HTML elements
         numbersElemList += `
         <div class="col">
 
@@ -150,12 +103,11 @@ playBtn.addEventListener('click', () => {
     // Show Numbers
     numbersElem.classList.remove('d-none');
 
-
-    //*** SET COUNTDOWN ***//
     // Set countdown on page
     countdownElem.innerText = count;
-
-    // Start countdown
+    
+    
+    //*** SET COUNTDOWN ***//
     countdown = setInterval(() => {
 
         // Update countdown
