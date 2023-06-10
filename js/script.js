@@ -49,28 +49,11 @@ MILESTONES:
 * FUNCTIONS
 -------------------------------------------*/
 
-//*** RESET GAME ***//
-const resetGame = () => {
-
-    // Set start message
-    messageElem.innerText = 'Premi il tasto "Gioca" per iniziare.';
-
-    // Reset elements visibility
-    countdownElem.classList.add('d-none');
-    numbersElem.classList.add('d-none');
-    playBtn.classList.remove('d-none');
-    submitBtn.classList.add('d-none');
-
-    // Reset Previous numbers
-    simonNumbers.splice(0, numbersToGuess);
-
-}
 
 
 /* -----------------------------------------
 * INIT
 -------------------------------------------*/
-
 
 //*** DOM ELEMENTS ***//
 const messageElem = document.getElementById('message');
@@ -99,13 +82,8 @@ console.log('--- INIT DONE ---');
 * LOGIC
 -------------------------------------------*/
 
-//*** CLICK PLAY BUTTON ***//
+//*** MEMORIZE PHASE ***//
 playBtn.addEventListener('click', () => {
-
-    /* --------
-    * FUNCTIONS
-    ----------*/
-
 
     /* --------
     * INIT
@@ -122,6 +100,9 @@ playBtn.addEventListener('click', () => {
 
     //*** CREATE NUMBERS ***//
     let numbersElemList = '';
+
+    // Reset Previous numbers
+    simonNumbers.splice(0, numbersToGuess);
 
     // Populate list with unique numbers from 1 to 20
     while (simonNumbers.length < numbersToGuess) {
@@ -141,7 +122,7 @@ playBtn.addEventListener('click', () => {
         numbersElemList += `
         <div class="col">
 
-            <div class="border rounded p-4 game-number">
+            <div class="border rounded p-4 number">
                 
                 <div class="fs-3">${randomNumber}</div>
                 <input type="number" class="d-none" min="1" max="20" value="1">
@@ -156,55 +137,7 @@ playBtn.addEventListener('click', () => {
     numbersElem.innerHTML = numbersElemList;
 
 
-    //*** SET COUNTDOWN ***//
-
-    // Set countdown on page
-    countdownElem.innerText = count;
-
-    // Start countdown
-    countdown = setInterval(() => {
-
-        // Update countdown
-        countdownElem.innerText = --count;
-
-
-        //*** COUNTDOWN OVER ***//
-        if (count === 0) {
-
-            // Stop timer
-            clearInterval(countdown);
-
-            // Hide countdown element
-            countdownElem.classList.add('d-none');
-
-            // Get dynamic elements
-            const simonNumbersElem = numbersElem.querySelectorAll('.game-number div');
-            const userNumbersElem = numbersElem.querySelectorAll('.game-number input');
-
-            // Hide numbers and show inputs 
-            for (let i = 0; i < numbersToGuess; i++) {
-
-                const simonNumberElem = simonNumbersElem[i];
-                const numberinput = userNumbersElem[i];
-
-                simonNumberElem.classList.add('d-none');
-                numberinput.classList.remove('d-none');
-                
-            }
-
-            //*** SHOW GUESS STATE ELEMENTS ***//
-            // Update message
-            messageElem.innerText = `Digita i numeri precedenti in qualsiasi ordine.`;
-
-            // Show submit button
-            submitBtn.classList.remove('d-none');
-
-        }
-
-    }, 1000);
-
-
-    //*** SHOW START GAME ELEMENTS ***//
+    //*** SHOW MEMORIZE PHASE ELEMENTS ***//
     // Hide Button
     playBtn.classList.add('d-none');
 
@@ -217,19 +150,67 @@ playBtn.addEventListener('click', () => {
     // Show Numbers
     numbersElem.classList.remove('d-none');
 
+
+    //*** SET COUNTDOWN ***//
+    // Set countdown on page
+    countdownElem.innerText = count;
+
+    // Start countdown
+    countdown = setInterval(() => {
+
+        // Update countdown
+        countdownElem.innerText = --count;
+
+
+        //*** GUESSING PHASE ***//
+        if (count === 0) {
+
+            // Stop timer
+            clearInterval(countdown);
+
+
+            //*** SHOW GUESS PHASE ELEMENTS ***//
+            // Get dynamic elements
+            const simonNumbersElem = numbersElem.querySelectorAll('.number div');
+            const userNumbersElem = numbersElem.querySelectorAll('.number input');
+
+            // Hide numbers and show inputs 
+            for (let i = 0; i < numbersToGuess; i++) {
+
+                const simonNumberElem = simonNumbersElem[i];
+                const userNumberElem = userNumbersElem[i];
+
+                simonNumberElem.classList.add('d-none');
+                userNumberElem.classList.remove('d-none');
+            }
+
+            // Hide countdown element
+            countdownElem.classList.add('d-none');
+
+            // Update message
+            messageElem.innerText = `Digita i numeri precedenti in qualsiasi ordine.`;
+
+            // Show submit button
+            submitBtn.classList.remove('d-none');
+
+        }
+
+    }, 1000);
+
 });
 
 
 
-//*** CLICK SUBMIT BUTTON ***//
+//*** RESULT PHASE ***//
 submitBtn.addEventListener('click', () => {
 
-    // Get inputs Elem
-    const userNumbersElem = numbersElem.querySelectorAll('.game-number input');
-
-    // Get guessed numbers
+    //*** GET GUESSED NUMBERS ***//
+    // Prepare guessed numbers
     const guessedNumbers = [];
     let guessedNumbersString = '';
+
+    // Get inputs Elem
+    const userNumbersElem = numbersElem.querySelectorAll('.number input');
 
     for (let i = 0; i < numbersToGuess; i++) {
 
@@ -246,7 +227,8 @@ submitBtn.addEventListener('click', () => {
         }
     }
 
-    //*** SHOW END GAME ELEMENTS ***//
+    
+    //*** SHOW RESULT PHASE ELEMENTS ***//
     // Hide submit button
     submitBtn.classList.add('d-none');
 
@@ -257,7 +239,12 @@ submitBtn.addEventListener('click', () => {
     messageElem.innerText = 'Non hai indovinato nessun numero.'
     if(guessedNumbers.length) messageElem.innerText = `Hai indovinato i numeri: ${guessedNumbersString} per un totale di ${guessedNumbers.length} numeri.`;
 
-    // Start reset counter
-    setTimeout(resetGame, 5000);
+    // Show Play button after a delay
+    setTimeout(() => {
+
+        playBtn.classList.remove('d-none');
+        playBtn.innerText = 'Rigioca';
+
+    }, 5000);
 
 });
