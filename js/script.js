@@ -57,7 +57,7 @@ const resetGame = () => {
 
     // Reset elements visibility
     countdownElem.classList.add('d-none');
-    gamePanelElem.classList.add('d-none');
+    numbersElem.classList.add('d-none');
     playBtn.classList.remove('d-none');
     submitBtn.classList.add('d-none');
 
@@ -73,9 +73,9 @@ const resetGame = () => {
 
 
 //*** DOM ELEMENTS ***//
-const messageElem = document.getElementById('game-message');
-const countdownElem = document.getElementById('game-countdown');
-const gamePanelElem = document.getElementById('game-panel');
+const messageElem = document.getElementById('message');
+const countdownElem = document.getElementById('countdown');
+const numbersElem = document.getElementById('numbers');
 const playBtn = document.getElementById('play-btn');
 const submitBtn = document.getElementById('submit-btn');
 
@@ -90,7 +90,7 @@ console.log('--- INIT ---');
 console.log('### Eleemnti DOM:');
 console.log('Messaggio: ' + messageElem);
 console.log('Countdown: ' + countdownElem);
-console.log('Pannello: ' + gamePanelElem);
+console.log('Pannello: ' + numbersElem);
 console.log('Bottone Play: ' + playBtn);
 console.log('Bottone Invia: ' + submitBtn);
 console.log('--- INIT DONE ---');
@@ -153,7 +153,7 @@ playBtn.addEventListener('click', () => {
     }
 
     // Insert numbers elements
-    gamePanelElem.innerHTML = numbersElemList;
+    numbersElem.innerHTML = numbersElemList;
 
 
     //*** SET COUNTDOWN ***//
@@ -178,16 +178,16 @@ playBtn.addEventListener('click', () => {
             countdownElem.classList.add('d-none');
 
             // Get dynamic elements
-            const numbersElem = gamePanelElem.querySelectorAll('.game-number div');
-            const numbersInput = gamePanelElem.querySelectorAll('.game-number input');
+            const simonNumbersElem = numbersElem.querySelectorAll('.game-number div');
+            const userNumbersElem = numbersElem.querySelectorAll('.game-number input');
 
             // Hide numbers and show inputs 
             for (let i = 0; i < numbersToGuess; i++) {
 
-                const numberElem = numbersElem[i];
-                const numberinput = numbersInput[i];
+                const simonNumberElem = simonNumbersElem[i];
+                const numberinput = userNumbersElem[i];
 
-                numberElem.classList.add('d-none');
+                simonNumberElem.classList.add('d-none');
                 numberinput.classList.remove('d-none');
                 
             }
@@ -214,8 +214,8 @@ playBtn.addEventListener('click', () => {
     // Show countdown
     countdownElem.classList.remove('d-none');
 
-    // Show Panel
-    gamePanelElem.classList.remove('d-none');
+    // Show Numbers
+    numbersElem.classList.remove('d-none');
 
 });
 
@@ -225,7 +225,7 @@ playBtn.addEventListener('click', () => {
 submitBtn.addEventListener('click', () => {
 
     // Get inputs Elem
-    const numbersInput = gamePanelElem.querySelectorAll('.game-number input');
+    const userNumbersElem = numbersElem.querySelectorAll('.game-number input');
 
     // Get guessed numbers
     const guessedNumbers = [];
@@ -234,10 +234,10 @@ submitBtn.addEventListener('click', () => {
     for (let i = 0; i < numbersToGuess; i++) {
 
         // Get current input
-        const currentInput = numbersInput[i];
+        const UserNumberElem = userNumbersElem[i];
 
         // Get user number
-        const userNumber = parseInt(currentInput.value);
+        const userNumber = parseInt(UserNumberElem.value);
 
         // Check number guess
         if(!guessedNumbers.includes(userNumber) && simonNumbers.includes(userNumber)) {
@@ -250,11 +250,11 @@ submitBtn.addEventListener('click', () => {
     // Hide submit button
     submitBtn.classList.add('d-none');
 
-    // Hide Panel
-    gamePanelElem.classList.add('d-none');
+    // Hide Numbers
+    numbersElem.classList.add('d-none');
 
     // Update message
-    messageElem.innerText = 'Non hai individuato alcun numero.'
+    messageElem.innerText = 'Non hai indovinato nessun numero.'
     if(guessedNumbers.length) messageElem.innerText = `Hai indovinato i numeri: ${guessedNumbersString} per un totale di ${guessedNumbers.length} numeri.`;
 
     // Start reset counter
