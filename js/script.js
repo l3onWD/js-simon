@@ -73,7 +73,7 @@ playBtn.addEventListener('click', () => {
 
         // Create HTML elements
         numbersElemList += `
-        <div class="col">
+        <li class="col">
 
             <div class="border rounded p-4 number">
                 
@@ -82,7 +82,7 @@ playBtn.addEventListener('click', () => {
 
             </div>
 
-        </div>
+        </li>
         `;
     }
 
