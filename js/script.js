@@ -52,7 +52,7 @@ playBtn.addEventListener('click', () => {
     ----------*/
 
     //*** CREATE NUMBERS ***//
-    let numbersElemList = '';
+    let numbersListElem = '';
 
     // Reset Previous numbers
     simonNumbers.splice(0, numbersToGuess);
@@ -72,7 +72,7 @@ playBtn.addEventListener('click', () => {
         simonNumbers.push(randomNumber);
 
         // Create HTML elements
-        numbersElemList += `
+        numbersListElem += `
         <li class="col">
 
             <div class="border rounded p-4 number">
@@ -87,7 +87,7 @@ playBtn.addEventListener('click', () => {
     }
 
     // Insert numbers elements
-    numbersElem.innerHTML = numbersElemList;
+    numbersElem.innerHTML = numbersListElem;
 
 
     //*** SHOW MEMORIZE PHASE ELEMENTS ***//
